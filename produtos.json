@@ -7,15 +7,225 @@
     "verificacao": "B_6wvBaCWDcHgmx83L7eyDoiARCMusfMZkjHunoQFB4"
   },
   "produtos": [
-    { "slug": "simulado-assistente-administrativo-concurso", "nome": "Assistente Administrativo", "tipo": "Cargo", "nivel": "Médio", "questoes": 300, "cor": "#1F5D45", "link": "https://pay.hotmart.com/S107380773H", "assuntos": [] },
-    { "slug": "simulado-tecnico-judiciario-concurso", "nome": "Técnico Judiciário", "tipo": "Cargo", "nivel": "Médio", "questoes": 300, "cor": "#1F5A80", "link": "https://pay.hotmart.com/A107370122E", "assuntos": [] },
-    { "slug": "simulado-concurso-bancario", "nome": "Concurso Bancário", "tipo": "Cargo", "nivel": "Médio", "questoes": 300, "cor": "#5F6B1F", "link": "https://pay.hotmart.com/I108176566N", "assuntos": [] },
-    { "slug": "simulado-tecnico-enfermagem-concurso", "nome": "Técnico de Enfermagem", "tipo": "Cargo", "nivel": "Médio a difícil", "questoes": 300, "cor": "#B0306A", "link": "https://pay.hotmart.com/B108170101V", "assuntos": [] },
-    { "slug": "simulado-portugues-concurso", "nome": "Língua Portuguesa", "tipo": "Matéria", "nivel": "Médio", "questoes": 500, "cor": "#162540", "link": "https://pay.hotmart.com/Q105708594B", "assuntos": [] },
-    { "slug": "simulado-raciocinio-logico-matematica-500-questoes", "nome": "Raciocínio Lógico e Matemática (500 questões)", "tipo": "Matéria", "nivel": "Médio", "questoes": 500, "cor": "#5D1A8A", "link": "https://pay.hotmart.com/X105763515R", "assuntos": [] },
-    { "slug": "simulado-raciocinio-logico-matematica-nivel-dificil", "nome": "Raciocínio Lógico e Matemática (nível difícil)", "tipo": "Matéria", "nivel": "Difícil", "questoes": 300, "cor": "#7A2020", "link": "https://pay.hotmart.com/T107369381G", "assuntos": [] },
-    { "slug": "simulado-informatica-concurso", "nome": "Informática", "tipo": "Matéria", "nivel": "Médio", "questoes": 300, "cor": "#2A9D9A", "link": "https://pay.hotmart.com/X108146982L", "assuntos": [] },
-    { "slug": "simulado-direito-constitucional-concurso", "nome": "Direito Constitucional", "tipo": "Matéria", "nivel": "Médio", "questoes": 300, "cor": "#6B4423", "link": "https://pay.hotmart.com/M108155620F", "assuntos": [] },
-    { "slug": "simulado-direito-publico-redacao-oficial-concurso", "nome": "Direito Público e Redação Oficial", "tipo": "Matéria", "nivel": "Médio", "questoes": 300, "cor": "#B5532E", "link": "https://pay.hotmart.com/G107383310U", "assuntos": [] }
+    {
+      "slug": "simulado-assistente-administrativo-concurso",
+      "nome": "Assistente Administrativo",
+      "tipo": "Cargo",
+      "nivel": "Médio",
+      "questoes": 300,
+      "cor": "#1F5D45",
+      "link": "https://pay.hotmart.com/S107380773H",
+      "assuntos": [
+        "Língua Portuguesa",
+        "Raciocínio lógico e matemática",
+        "Redação oficial: ofício, memorando e requerimento",
+        "Arquivologia e protocolo",
+        "Atendimento ao público",
+        "Ética no serviço público",
+        "Noções de administração e licitações"
+      ]
+    },
+    {
+      "slug": "simulado-tecnico-judiciario-concurso",
+      "nome": "Técnico Judiciário",
+      "tipo": "Cargo",
+      "nivel": "Médio",
+      "questoes": 300,
+      "cor": "#1F5A80",
+      "link": "https://pay.hotmart.com/A107370122E",
+      "assuntos": [
+        "Língua Portuguesa",
+        "Legislação",
+        "Ética e gestão pública",
+        "Informática e LGPD",
+        "Direitos Humanos",
+        "Direito Constitucional",
+        "Direito Administrativo",
+        "Direito Civil",
+        "Direito Processual Civil",
+        "Direito Penal",
+        "Direito Processual Penal"
+      ]
+    },
+    {
+      "slug": "simulado-concurso-bancario",
+      "nome": "Concurso Bancário",
+      "tipo": "Cargo",
+      "nivel": "Médio",
+      "questoes": 300,
+      "cor": "#5F6B1F",
+      "link": "https://pay.hotmart.com/I108176566N",
+      "assuntos": [
+        "Sistema Financeiro Nacional",
+        "Produtos e serviços bancários",
+        "Investimentos e mercado de capitais",
+        "Regulação, conformidade e prevenção",
+        "Ética, cultura organizacional e responsabilidade",
+        "Atendimento, vendas e negociação",
+        "Matemática financeira",
+        "Matemática, probabilidade e estatística",
+        "Língua Portuguesa aplicada ao cargo",
+        "Informática e raciocínio lógico"
+      ]
+    },
+    {
+      "slug": "simulado-tecnico-enfermagem-concurso",
+      "nome": "Técnico de Enfermagem",
+      "tipo": "Cargo",
+      "nivel": "Médio a difícil",
+      "questoes": 300,
+      "cor": "#B0306A",
+      "link": "https://pay.hotmart.com/B108170101V",
+      "assuntos": [
+        "Ética, legislação e exercício profissional",
+        "SUS e políticas de saúde",
+        "Epidemiologia, vigilância e imunização",
+        "Fundamentos e procedimentos de enfermagem",
+        "Biossegurança e controle de infecção",
+        "Medicamentos e cálculos",
+        "Saúde do adulto: clínica e cirúrgica",
+        "Urgência, emergência e segurança do paciente",
+        "Saúde da mulher, da criança e do adolescente",
+        "Idoso, saúde mental, trabalhador e populações específicas"
+      ]
+    },
+    {
+      "slug": "simulado-portugues-concurso",
+      "nome": "Língua Portuguesa",
+      "tipo": "Matéria",
+      "nivel": "Médio",
+      "questoes": 500,
+      "cor": "#162540",
+      "link": "https://pay.hotmart.com/Q105708594B",
+      "assuntos": [
+        "Compreensão e interpretação de texto",
+        "Classes gramaticais",
+        "Uso da crase",
+        "Figuras de linguagem",
+        "Flexão e emprego dos verbos",
+        "Concordância verbal e nominal",
+        "Regência verbal e nominal",
+        "Ortografia e acentuação gráfica",
+        "Formação de palavras",
+        "Termos da oração e análise sintática",
+        "Pontuação",
+        "Orações subordinadas",
+        "Colocação pronominal",
+        "Redação oficial",
+        "Gêneros e tipologia textual",
+        "Argumentação, coesão e coerência",
+        "Funções da linguagem",
+        "Variação linguística, denotação e conotação"
+      ]
+    },
+    {
+      "slug": "simulado-raciocinio-logico-matematica-500-questoes",
+      "nome": "Raciocínio Lógico e Matemática (500 questões)",
+      "tipo": "Matéria",
+      "nivel": "Médio",
+      "questoes": 500,
+      "cor": "#5D1A8A",
+      "link": "https://pay.hotmart.com/X105763515R",
+      "assuntos": [
+        "Lógica proposicional: conectivos, tabela-verdade e equivalências",
+        "Argumentos, silogismos e falácias",
+        "Conjuntos e diagramas de Venn",
+        "Sequências numéricas e progressões",
+        "Porcentagem, descontos e acréscimos",
+        "Regra de três, razão e proporção",
+        "Juros simples",
+        "Probabilidade e análise combinatória",
+        "Geometria e grandezas",
+        "Visualização espacial e contagem de figuras",
+        "Problemas de idade",
+        "Álgebra e funções",
+        "Estatística: média e moda",
+        "Grafos e redes",
+        "Teoria dos números",
+        "Calendário, criptografia e enigmas lógicos"
+      ]
+    },
+    {
+      "slug": "simulado-raciocinio-logico-matematica-nivel-dificil",
+      "nome": "Raciocínio Lógico e Matemática (nível difícil)",
+      "tipo": "Matéria",
+      "nivel": "Difícil",
+      "questoes": 300,
+      "cor": "#7A2020",
+      "link": "https://pay.hotmart.com/T107369381G",
+      "assuntos": [
+        "Porcentagem e variações percentuais",
+        "Regra de três simples e composta",
+        "Razão e proporção",
+        "Juros simples e compostos",
+        "Lógica proposicional e argumentação",
+        "Conjuntos e inclusão-exclusão",
+        "Análise combinatória",
+        "Probabilidade",
+        "Estatística: tendência central e dispersão",
+        "Geometria plana",
+        "Geometria espacial",
+        "Funções: afim, quadrática e composição",
+        "Sistemas lineares, equações quadráticas, exponenciais e logaritmos",
+        "MDC, MMC e divisibilidade",
+        "Sequências, recorrências, PA e PG"
+      ]
+    },
+    {
+      "slug": "simulado-informatica-concurso",
+      "nome": "Informática",
+      "tipo": "Matéria",
+      "nivel": "Médio a difícil",
+      "questoes": 300,
+      "cor": "#2A9D9A",
+      "link": "https://pay.hotmart.com/X108146982L",
+      "assuntos": [
+        "Sistemas operacionais",
+        "Editores de texto",
+        "Planilhas",
+        "Apresentações, e-mail e colaboração",
+        "Internet e navegadores",
+        "Redes de computadores",
+        "Segurança da informação",
+        "Backup, hardware e software",
+        "Nuvem, inteligência artificial e governo digital",
+        "Legislação digital e proteção de dados"
+      ]
+    },
+    {
+      "slug": "simulado-direito-constitucional-concurso",
+      "nome": "Direito Constitucional",
+      "tipo": "Matéria",
+      "nivel": "Médio a difícil",
+      "questoes": 300,
+      "cor": "#6B4423",
+      "link": "https://pay.hotmart.com/M108155620F",
+      "assuntos": [
+        "Teoria da Constituição",
+        "Princípios fundamentais e direitos individuais",
+        "Remédios constitucionais",
+        "Direitos sociais, nacionalidade e direitos políticos",
+        "Organização do Estado e administração pública",
+        "Poder Legislativo",
+        "Poder Executivo, Judiciário e funções essenciais à Justiça",
+        "Controle de constitucionalidade",
+        "Defesa do Estado e segurança pública",
+        "Ordem social, econômica, tributária e financeira"
+      ]
+    },
+    {
+      "slug": "simulado-direito-publico-redacao-oficial-concurso",
+      "nome": "Direito Público e Redação Oficial",
+      "tipo": "Matéria",
+      "nivel": "Médio",
+      "questoes": 300,
+      "cor": "#B5532E",
+      "link": "https://pay.hotmart.com/G107383310U",
+      "assuntos": [
+        "Direito Constitucional: teoria da Constituição, direitos e garantias fundamentais, direitos sociais e políticos, nacionalidade, organização do Estado e dos poderes",
+        "Direito Administrativo: princípios, atos administrativos, poderes, agentes públicos, responsabilidade civil do Estado, serviços e bens públicos, licitação",
+        "Redação oficial: atributos, pronomes de tratamento, fechos, padrão ofício, documento eletrônico e e-mail institucional"
+      ]
+    }
   ]
 }
