@@ -8,7 +8,7 @@ const CSS = ':root{--bg:#FBFCFA;--ink:#1B211E;--mu:#5F6B64;--ln:#E3E8E3;--ac:#2F
 'body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}' +
 '.w{max-width:1040px;margin:0 auto;padding:0 18px}a{color:inherit}.mu{color:var(--mu)}' +
 'header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:22px 0}' +
-'.logo{font-weight:700;font-size:22px;letter-spacing:-.02em;text-decoration:none}nav a{margin-left:20px;color:var(--mu);text-decoration:none;font-size:14px}' +
+'.logo{display:block;line-height:0}.logo img{display:block;height:28px;width:auto}nav a{margin-left:20px;color:var(--mu);text-decoration:none;font-size:14px}' +
 'h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.08;letter-spacing:-.03em;margin:.3em 0 .5em}h2{font-size:1.35rem;margin:2.2em 0 .6em}' +
 '.lede{font-size:18px;color:var(--mu);max-width:56ch}.tag{font-size:13px;color:var(--mu)}' +
 '.hero,.pg{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;padding:28px 0}.pg{grid-template-columns:1.4fr .8fr}' +
@@ -30,11 +30,11 @@ const U = p => S.url + p;
 
 function layout(p, title, desc, body, ld) {
   return '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">' +
-    '<title>' + e(title) + '</title><meta name="description" content="' + e(desc) + '"><link rel="canonical" href="' + U(p) + '">' +
+    '<title>' + e(title) + '</title><meta name="description" content="' + e(desc) + '"><link rel="canonical" href="' + U(p) + '"><link rel="icon" href="/questoteca-icone.svg" type="image/svg+xml">' +
     '<meta property="og:title" content="' + e(title) + '"><meta property="og:description" content="' + e(desc) + '"><meta property="og:type" content="website"><meta property="og:url" content="' + U(p) + '">' +
     (S.verificacao ? '<meta name="google-site-verification" content="' + e(S.verificacao) + '">' : '') +
     '<style>' + CSS + '</style>' + (ld ? '<script type="application/ld+json">' + JSON.stringify(ld) + '</script>' : '') +
-    '</head><body><div class="w"><header><a class="logo" href="/">' + S.nome + '</a><nav><a href="/#catalogo">Simulados</a><a href="/#como">Como funciona</a><a href="/sobre/">Sobre</a></nav></header>' + body +
+    '</head><body><div class="w"><header><a class="logo" href="/"><img src="/questoteca-logo.svg" alt="' + S.nome + '" width="140" height="28"></a><nav><a href="/#catalogo">Simulados</a><a href="/#como">Como funciona</a><a href="/sobre/">Sobre</a></nav></header>' + body +
     '<footer><p>' + AV + '</p><p><a href="/sobre/">Sobre</a> · <a href="/contato/">Contato</a> · <a href="/privacidade/">Privacidade</a></p><p>' + S.nome + ' · ' + S.descritor + '</p></footer></div></body></html>';
 }
 
@@ -81,6 +81,7 @@ info('/contato/', 'Contato', '<p>A compra, a entrega do arquivo e o suporte são
 info('/privacidade/', 'Privacidade', '<p>Este site não tem cadastro, formulário nem cookies próprios, e não coleta dados pessoais. Ele é hospedado na Cloudflare, que pode registrar dados técnicos de acesso (como endereço IP) para manter o serviço funcionando.</p><p>Ao clicar em comprar, você vai para a Hotmart, que cuida do pagamento e dos seus dados conforme a política dela.</p><p>Responsável: ' + S.responsavel + '.</p>');
 
 home(); P.forEach(prod);
+['questoteca-logo.svg', 'questoteca-icone.svg'].forEach(f => { if (fs.existsSync(f)) fs.copyFileSync(f, path.join(OUT, f)); });
 W('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ['/'].concat(P.map(p => '/' + p.slug + '/'), ['/sobre/', '/contato/', '/privacidade/']).map(u => '<url><loc>' + U(u) + '</loc></url>').join('') + '</urlset>');
 W('robots.txt', 'User-agent: *\nAllow: /\nSitemap: ' + U('/sitemap.xml') + '\n');
 console.log('OK: ' + (P.length + 4) + ' páginas geradas em /' + OUT);
