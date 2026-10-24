@@ -14,15 +14,17 @@ const CSS = ':root{--bg:#FBFCFA;--ink:#1B211E;--mu:#5F6B64;--ln:#E3E8E3;--ac:#2F
 '.hero,.pg{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;padding:28px 0}.pg{grid-template-columns:1.4fr .8fr}' +
 '@media(max-width:760px){.hero,.pg{grid-template-columns:1fr;gap:24px}}' +
 '.btn{display:inline-block;background:var(--ac);color:#fff;padding:13px 24px;border-radius:999px;font-weight:600;text-decoration:none;text-align:center}.btn:hover{filter:brightness(1.1)}' +
-'.row{display:grid;grid-template-columns:44px 1fr auto auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--ln);text-decoration:none}.row:hover b{text-decoration:underline}' +
-'@media(max-width:560px){.row{grid-template-columns:44px 1fr auto}.row .q{display:none}}' +
-'.tile{width:40px;height:40px;border-radius:8px;background:var(--c);color:#fff;font:600 12px system-ui;display:grid;place-items:center}' +
+'.row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--ln)}.rl{display:flex;gap:14px;align-items:center;text-decoration:none;min-width:0}.rl:hover b{text-decoration:underline}.pr{font-weight:600}.btn.sm{padding:8px 18px;font-size:14px}' +
+'@media(max-width:560px){.row{grid-template-columns:1fr auto}.pr{display:none}}' +
+'.tile{flex:none;width:40px;height:40px;border-radius:8px;background:var(--c);color:#fff;font:600 12px system-ui;display:grid;place-items:center}' +
 '.box{background:#fff;border:1px solid var(--ln);border-radius:14px;padding:22px}.buy{position:sticky;top:16px;align-self:start}.price{font-size:2rem;font-weight:700}' +
 'dl{margin:12px 0}dl div{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--ln);font-size:14px}dt{color:var(--mu)}dd{margin:0}' +
 '.o{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:1px solid var(--ln);border-radius:10px;padding:10px 14px;margin:8px 0;cursor:pointer}.o:hover:enabled{border-color:var(--ac)}' +
 '.o.ok{background:#E1F1E8;border-color:#1E7A52}.o.bad{background:#F7E4E0;border-color:#B3402F}#why{font-size:15px;margin-top:12px}' +
 'details{border-top:1px solid var(--ln);padding:10px 0}summary{cursor:pointer;font-weight:600}ul.t{columns:2;padding-left:18px}@media(max-width:560px){ul.t{columns:1}}' +
-'footer{border-top:1px solid var(--ln);margin-top:56px;padding:24px 0 48px;font-size:14px;color:var(--mu)}:focus-visible{outline:2px solid var(--ac);outline-offset:3px}';
+'footer{border-top:1px solid var(--ln);margin-top:56px;padding:24px 0 48px;font-size:14px;color:var(--mu)}:focus-visible{outline:2px solid var(--ac);outline-offset:3px}' +
+'.st{display:flex;gap:6px 18px;flex-wrap:wrap;list-style:none;padding:0;margin:14px 0 0;counter-reset:s;font-size:14px;color:var(--mu)}.st li::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--ac);color:#fff;font-size:12px;margin-right:6px}.sbar,.sp{display:none}' +
+'@media(max-width:760px){.sp{display:block;height:80px}.sbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:5;justify-content:space-between;align-items:center;gap:12px;background:#fff;border-top:1px solid var(--ln);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}.sbar .btn{padding:12px 28px}}';
 
 fs.rmSync(OUT, { recursive: true, force: true });
 const W = (rel, txt) => { const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, txt); };
@@ -38,7 +40,7 @@ function layout(p, title, desc, body, ld) {
     '<footer><p>' + AV + '</p><p><a href="/sobre/">Sobre</a> · <a href="/contato/">Contato</a> · <a href="/privacidade/">Privacidade</a></p><p>' + S.nome + ' · ' + S.descritor + '</p></footer></div></body></html>';
 }
 
-const row = p => '<a class="row" href="/' + p.slug + '/"><span class="tile" style="--c:' + p.cor + '">' + p.questoes + '</span><span><b>' + e(p.nome) + '</b><br><span class="tag">' + e(p.nivel) + '</span></span><span class="tag q">' + p.questoes + ' questões</span><span>' + BRL + '</span></a>';
+const row = p => '<div class="row"><a class="rl" href="/' + p.slug + '/"><span class="tile" style="--c:' + p.cor + '">' + p.questoes + '</span><span><b>' + e(p.nome) + '</b><br><span class="tag">' + e(p.nivel) + ' · ' + p.questoes + ' questões</span></span></a><span class="pr">' + BRL + '</span><a class="btn sm" href="' + e(p.link) + '" target="_blank" rel="noopener">Comprar</a></div>';
 
 // Questão de teste da página inicial
 const QUIZ = '<div class="box" id="quiz"><span class="tag">Teste uma questão · Informática</span><p>Em uma planilha, a célula B2 contém a fórmula <code>=A2*10%</code>. Ao copiar B2 e colar em B3, a fórmula que passa a constar em B3 é:</p>' +
@@ -48,8 +50,8 @@ const QUIZ = '<div class="box" id="quiz"><span class="tag">Teste uma questão ·
 function home() {
   const cargos = P.filter(p => p.tipo === 'Cargo'), mats = P.filter(p => p.tipo === 'Matéria');
   const body = '<section class="hero"><div><span class="tag">Nível médio · Simulados digitais</span><h1>Simulados para concursos de nível médio</h1>' +
-    '<p class="lede">Cada simulado traz de 300 a 500 questões com resposta na hora, explicação e relatório do seu desempenho por assunto. Você baixa o arquivo e estuda no celular ou no computador, até sem internet.</p>' +
-    '<p><a class="btn" href="#catalogo">Ver os ' + P.length + ' simulados</a></p><p class="tag">' + BRL + ' cada · Sem cadastro · Funciona offline</p></div>' + QUIZ + '</section>' +
+    '<p class="lede">Aqui você encontra simulados prontos por cargo e por matéria, com 300 a 500 questões cada. Você compra pela Hotmart, baixa o arquivo e estuda no celular ou no computador, com resposta na hora e relatório por assunto.</p>' +
+    '<p><a class="btn" href="#catalogo">Escolher meu simulado</a></p><p class="tag">' + BRL + ' cada · Sem cadastro · Funciona offline</p><ol class="st"><li>Escolha o cargo ou a matéria</li><li>Compre na Hotmart</li><li>Baixe e estude</li></ol></div>' + QUIZ + '</section>' +
     '<section id="catalogo"><h2>Simulados por cargo</h2>' + cargos.map(row).join('') + '<h2>Simulados por matéria</h2>' + mats.map(row).join('') + '</section>' +
     '<section id="como"><h2>Como funciona</h2><ol><li><b>Compre e baixe.</b> O pagamento é feito na Hotmart. Depois dele, você baixa o arquivo ZIP.</li><li><b>Extraia e abra.</b> Abra o arquivo HTML no navegador do celular ou do computador.</li><li><b>Responda e revise.</b> Veja na hora se acertou, leia a explicação e, no fim, receba o relatório por assunto.</li></ol>' +
     '<h2>O que vem em cada simulado</h2><ul><li>Resposta na hora, com explicação</li><li>Relatório por assunto, com o que estudar primeiro</li><li>Revisão das questões erradas</li><li>Exportação do progresso, para continuar depois</li><li>Modo noturno dentro do simulado</li><li>Funciona sem internet, sem instalação</li></ul></section>';
@@ -69,7 +71,7 @@ function prod(p) {
     '<details><summary>Como recebo o arquivo?</summary><p>O pagamento e a entrega são feitos pela Hotmart. Terminada a compra, você baixa o ZIP.</p></details>' +
     '<details><summary>O simulado garante aprovação?</summary><p>Não. É um material de treino. Confira sempre o edital do seu concurso.</p></details></div>' +
     '<aside class="box buy"><span class="tag">Simulado digital</span><div class="price">' + BRL + '</div><dl><div><dt>Questões</dt><dd>' + n + '</dd></div><div><dt>Nível</dt><dd>' + e(p.nivel) + '</dd></div><div><dt>Formato</dt><dd>ZIP com arquivo HTML</dd></div><div><dt>Internet</dt><dd>Só para baixar</dd></div></dl>' +
-    '<a class="btn" style="display:block" href="' + e(p.link) + '" target="_blank" rel="noopener">Comprar na Hotmart</a><p class="tag">Pagamento e entrega pela Hotmart. ' + AV.split(';')[0] + '.</p></aside></div>';
+    '<a class="btn" style="display:block" href="' + e(p.link) + '" target="_blank" rel="noopener">Comprar na Hotmart</a><p class="tag">Pagamento e entrega pela Hotmart. ' + AV.split(';')[0] + '.</p></aside></div><div class="sp"></div><div class="sbar"><div><b>' + BRL + '</b><br><span class="tag">' + n + ' questões · Hotmart</span></div><a class="btn" href="' + e(p.link) + '" target="_blank" rel="noopener">Comprar</a></div>';
   W(path_ + 'index.html', layout(path_, 'Simulado de ' + p.nome + ' para Concurso | ' + S.nome, desc, body, {
     '@context': 'https://schema.org', '@type': 'Product', name: 'Simulado de ' + p.nome + ' para concurso', description: desc, brand: { '@type': 'Brand', name: S.nome },
     offers: { '@type': 'Offer', price: '9.98', priceCurrency: 'BRL', availability: 'https://schema.org/InStock', url: p.link } }));
