@@ -1,0 +1,21 @@
+{
+  "site": {
+    "nome": "Questoteca",
+    "descritor": "Simulados para Concursos de Nível Médio",
+    "url": "https://questoteca.pages.dev",
+    "responsavel": "Barbieri Quality",
+    "verificacao": ""
+  },
+  "produtos": [
+    { "slug": "simulado-assistente-administrativo-concurso", "nome": "Assistente Administrativo", "tipo": "Cargo", "nivel": "Médio", "questoes": 300, "cor": "#1F5D45", "link": "https://pay.hotmart.com/S107380773H", "assuntos": [] },
+    { "slug": "simulado-tecnico-judiciario-concurso", "nome": "Técnico Judiciário", "tipo": "Cargo", "nivel": "Médio", "questoes": 300, "cor": "#1F5A80", "link": "https://pay.hotmart.com/A107370122E", "assuntos": [] },
+    { "slug": "simulado-concurso-bancario", "nome": "Concurso Bancário", "tipo": "Cargo", "nivel": "Médio", "questoes": 300, "cor": "#5F6B1F", "link": "https://pay.hotmart.com/I108176566N", "assuntos": [] },
+    { "slug": "simulado-tecnico-enfermagem-concurso", "nome": "Técnico de Enfermagem", "tipo": "Cargo", "nivel": "Médio a difícil", "questoes": 300, "cor": "#B0306A", "link": "https://pay.hotmart.com/B108170101V", "assuntos": [] },
+    { "slug": "simulado-portugues-concurso", "nome": "Língua Portuguesa", "tipo": "Matéria", "nivel": "Médio", "questoes": 500, "cor": "#162540", "link": "https://pay.hotmart.com/Q105708594B", "assuntos": [] },
+    { "slug": "simulado-raciocinio-logico-matematica-500-questoes", "nome": "Raciocínio Lógico e Matemática (500 questões)", "tipo": "Matéria", "nivel": "Médio", "questoes": 500, "cor": "#5D1A8A", "link": "https://pay.hotmart.com/X105763515R", "assuntos": [] },
+    { "slug": "simulado-raciocinio-logico-matematica-nivel-dificil", "nome": "Raciocínio Lógico e Matemática (nível difícil)", "tipo": "Matéria", "nivel": "Difícil", "questoes": 300, "cor": "#7A2020", "link": "https://pay.hotmart.com/T107369381G", "assuntos": [] },
+    { "slug": "simulado-informatica-concurso", "nome": "Informática", "tipo": "Matéria", "nivel": "Médio", "questoes": 300, "cor": "#2A9D9A", "link": "https://pay.hotmart.com/X108146982L", "assuntos": [] },
+    { "slug": "simulado-direito-constitucional-concurso", "nome": "Direito Constitucional", "tipo": "Matéria", "nivel": "Médio", "questoes": 300, "cor": "#6B4423", "link": "https://pay.hotmart.com/M108155620F", "assuntos": [] },
+    { "slug": "simulado-direito-publico-redacao-oficial-concurso", "nome": "Direito Público e Redação Oficial", "tipo": "Matéria", "nivel": "Médio", "questoes": 300, "cor": "#B5532E", "link": "https://pay.hotmart.com/G107383310U", "assuntos": [] }
+  ]
+}
