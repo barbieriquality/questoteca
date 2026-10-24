@@ -23,6 +23,7 @@ const CSS = ':root{--bg:#FBFCFA;--ink:#1B211E;--mu:#5F6B64;--ln:#E3E8E3;--ac:#2F
 '.o.ok{background:#E1F1E8;border-color:#1E7A52}.o.bad{background:#F7E4E0;border-color:#B3402F}#why{font-size:15px;margin-top:12px}' +
 'details{border-top:1px solid var(--ln);padding:10px 0}summary{cursor:pointer;font-weight:600}ul.t{columns:2;padding-left:18px}@media(max-width:560px){ul.t{columns:1}}' +
 'footer{border-top:1px solid var(--ln);margin-top:56px;padding:24px 0 48px;font-size:14px;color:var(--mu)}:focus-visible{outline:2px solid var(--ac);outline-offset:3px}' +
+'.o{color:var(--ink)}.o b{margin-right:10px}.o:disabled{color:var(--ink);cursor:default}.o:disabled:not(.ok):not(.bad){opacity:.7}#qe{white-space:pre-line}#why .btn{margin-top:12px}' +
 '.st{display:flex;gap:6px 18px;flex-wrap:wrap;list-style:none;padding:0;margin:14px 0 0;counter-reset:s;font-size:14px;color:var(--mu)}.st li::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--ac);color:#fff;font-size:12px;margin-right:6px}.sbar,.sp{display:none}' +
 '@media(max-width:760px){.sp{display:block;height:80px}.sbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:5;justify-content:space-between;align-items:center;gap:12px;background:#fff;border-top:1px solid var(--ln);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}.sbar .btn{padding:12px 28px}}';
 
@@ -42,10 +43,66 @@ function layout(p, title, desc, body, ld) {
 
 const row = p => '<div class="row"><a class="rl" href="/' + p.slug + '/"><span class="tile" style="--c:' + p.cor + '">' + p.questoes + '</span><span><b>' + e(p.nome) + '</b><br><span class="tag">' + e(p.nivel) + ' · ' + p.questoes + ' questões</span></span></a><span class="pr">' + BRL + '</span><a class="btn sm" href="' + e(p.link) + '" target="_blank" rel="noopener">Comprar</a></div>';
 
-// Questão de teste da página inicial
-const QUIZ = '<div class="box" id="quiz"><span class="tag">Teste uma questão · Informática</span><p>Em uma planilha, a célula B2 contém a fórmula <code>=A2*10%</code>. Ao copiar B2 e colar em B3, a fórmula que passa a constar em B3 é:</p>' +
-  ['=A2*10%', '=A3*10%', '=$A$2*10%', '=A3*10', '=B2*10%'].map((o, i) => '<button class="o" data-i="' + i + '"><b>' + 'ABCDE'[i] + '</b> &nbsp;<code>' + o + '</code></button>').join('') +
-  '<div id="why" hidden></div></div><script>!function(){var b=document.querySelectorAll("#quiz .o"),w=document.getElementById("why");b.forEach(function(x,i){x.onclick=function(){b.forEach(function(y,j){y.disabled=true;if(j==1)y.classList.add("ok");else if(j==i)y.classList.add("bad")});w.innerHTML=(i==1?"Correto. ":"Não foi dessa vez. ")+"<b>=A3*10%.</b> A referência A2 é relativa e acompanha o deslocamento de uma linha para baixo. Com $A$2 a referência seria fixa.";w.hidden=false}})}()</script>';
+// Questão de teste da página inicial: 1 de cada simulado, sorteada a cada carregamento
+const mk = (slug, tag, q, ok, errs, pos, why) => { const alt = errs.slice(); alt.splice(pos, 0, ok); return { slug, tag, q, alt, ok: pos, why }; };
+const QZ = [
+  mk('simulado-informatica-concurso', 'Informática',
+    'Em uma planilha, a célula B2 contém a fórmula =A2*10%. Ao copiar B2 e colar em B3, a fórmula que passa a constar em B3 é:',
+    '=A3*10%', ['=A2*10%', '=$A$2*10%', '=A3*10', '=B2*10%'], 1,
+    'Ao copiar B2 para a linha de baixo, a referência relativa A2 avança uma linha e vira A3, e o 10% é mantido. =A2*10% só ocorreria se a referência não acompanhasse a cópia. =$A$2*10% é referência absoluta, que fica fixa ao copiar. =A3*10 troca 10% por 10, e a conta passa a multiplicar por 10. =B2*10% trocaria a coluna A pela coluna da própria fórmula, o que a cópia para baixo não faz.'),
+  mk('simulado-portugues-concurso', 'Língua Portuguesa',
+    'Assinale a alternativa em que o uso do sinal indicativo de crase está correto.',
+    'A reunião começará às nove horas, no auditório.',
+    ['Entreguei os documentos à todos os servidores do setor.', 'O ofício foi encaminhado à Vossa Senhoria na terça-feira.', 'Os candidatos foram à pé até o local da prova.', 'Prefiro o atendimento presencial à atendimento por telefone.'], 2,
+    'Antes de horas determinadas, ocorre a fusão da preposição a com o artigo feminino as: às nove horas. Não há crase antes de pronome indefinido masculino (a todos), de pronome de tratamento (a Vossa Senhoria), em locução com palavra masculina (a pé) nem diante de substantivo masculino (a atendimento).'),
+  mk('simulado-raciocinio-logico-matematica-500-questoes', 'Raciocínio Lógico',
+    'Considere a afirmação: “Se o protocolo foi registrado, então o processo foi encaminhado.” Uma afirmação logicamente equivalente a ela é:',
+    'Se o processo não foi encaminhado, então o protocolo não foi registrado.',
+    ['Se o processo foi encaminhado, então o protocolo foi registrado.', 'Se o protocolo não foi registrado, então o processo não foi encaminhado.', 'O protocolo foi registrado ou o processo foi encaminhado.', 'O protocolo foi registrado se, e somente se, o processo foi encaminhado.'], 3,
+    'A condicional “se p, então q” é equivalente à sua contrapositiva: se não q, então não p. A recíproca (se encaminhado, então registrado) e a inversa (se não registrado, então não encaminhado) são equivalentes entre si, mas não à original. “p ou q” tem outra tabela-verdade, e o bicondicional exige as duas implicações.'),
+  mk('simulado-raciocinio-logico-matematica-nivel-dificil', 'Matemática',
+    'O preço de um produto foi aumentado em 25%. Para que ele volte exatamente ao valor original, o novo preço deve sofrer um desconto de:',
+    '20%', ['25%', '12,5%', '15%', '30%'], 4,
+    'Com P como preço original, o novo preço é 1,25P. Para voltar a P, é preciso reduzir 0,25P sobre uma base de 1,25P, ou seja, 0,25 ÷ 1,25 = 0,20, que é 20%. O desconto de 25% incide sobre uma base maior e leva a 0,9375P, abaixo do original. Já 12,5% e 15% deixam o preço acima de P, e 30% o leva a 0,875P.'),
+  mk('simulado-direito-constitucional-concurso', 'Direito Constitucional',
+    'Assinale a alternativa que apresenta corretamente a finalidade do habeas data.',
+    'Assegurar o conhecimento e permitir a retificação de informações da própria pessoa constantes de registros ou bancos de dados de caráter público.',
+    ['Proteger a liberdade de locomoção ameaçada por ilegalidade ou abuso de poder.', 'Proteger direito líquido e certo não amparado por habeas corpus ou habeas data, violado por autoridade.', 'Suprir a falta de norma regulamentadora que inviabilize o exercício de direitos e liberdades constitucionais.', 'Anular ato lesivo ao patrimônio público ou à moralidade administrativa.'], 0,
+    'O habeas data garante à pessoa o acesso a informações sobre si em registros ou bancos de dados de caráter público e a retificação desses dados. A proteção da liberdade de locomoção é o habeas corpus. A proteção de direito líquido e certo, nos termos descritos, é o mandado de segurança. A falta de norma regulamentadora é combatida pelo mandado de injunção, e a anulação de ato lesivo ao patrimônio público é objeto da ação popular.'),
+  mk('simulado-direito-publico-redacao-oficial-concurso', 'Direito Administrativo',
+    'No Direito Administrativo, o princípio da legalidade impõe ao agente público o dever de:',
+    'agir somente nos limites e conforme o que a lei autoriza.',
+    ['agir de acordo com o que a lei não proíbe, como ocorre com os particulares.', 'atuar segundo a conveniência da chefia imediata quando a lei for omissa.', 'dispensar a motivação dos atos discricionários por serem de livre escolha.', 'praticar atos sem previsão legal sempre que isso aumentar a eficiência do serviço.'], 3,
+    'Para a Administração, a legalidade significa agir apenas de acordo com a lei e dentro do que ela permite. A regra de poder fazer tudo o que a lei não proíbe vale para os particulares, não para o agente público. A conveniência da chefia não substitui a lei, a discricionariedade existe dentro dos limites legais sem afastar a motivação, e a eficiência não autoriza atuar sem previsão legal.'),
+  mk('simulado-assistente-administrativo-concurso', 'Arquivologia',
+    'Na Secretaria Municipal de Vila Nova, os processos em andamento e os documentos de consulta frequente ficam no próprio setor que os produziu. Segundo a teoria das três idades, esses documentos estão na fase:',
+    'Corrente, porque são consultados com frequência pelo setor que os produziu.',
+    ['Intermediária, porque aguardam o cumprimento do prazo de guarda.', 'Permanente, porque têm valor histórico e devem ser preservados.', 'De eliminação, porque já cumpriram a finalidade para a qual foram criados.', 'Morta, porque saíram do uso administrativo e não são mais consultados.'], 0,
+    'Documentos em uso frequente, mantidos no setor que os produziu, estão na fase corrente. Na fase intermediária, a consulta já é rara e eles aguardam o prazo de guarda previsto na tabela de temporalidade. Na permanente, ficam guardados por seu valor histórico. A eliminação é o destino de documentos sem valor de guarda, e “arquivo morto” não é uma fase da teoria das três idades.'),
+  mk('simulado-tecnico-judiciario-concurso', 'Direito Penal',
+    'Uma conduta praticada em 2024 não era considerada crime naquela data. Em 2025, uma nova lei passou a tipificá-la como crime. Em relação a quem a praticou em 2024, é correto afirmar que:',
+    'não poderá ser punido, pois a lei que cria crime não retroage para atingir fatos anteriores à sua vigência.',
+    ['será punido pela nova lei, pois a conduta continua sendo investigada.', 'será punido pela nova lei, desde que o juiz considere a conduta grave.', 'será punido pela nova lei, com a pena reduzida pela metade.', 'será punido por analogia com o crime mais parecido previsto na lei anterior.'], 1,
+    'Vale o princípio da legalidade e da irretroatividade da lei penal mais severa: não há crime sem lei anterior que o defina, e a lei que cria crime só alcança fatos posteriores à sua vigência. A gravidade da conduta, a investigação em andamento e a redução de pena não autorizam retroagir. A analogia que prejudica o réu também é vedada em matéria penal.'),
+  mk('simulado-concurso-bancario', 'Sistema Financeiro',
+    'No Sistema Financeiro Nacional, é correto afirmar que o Banco Central do Brasil:',
+    'cumpre e faz cumprir as normas do Conselho Monetário Nacional, fiscalizando as instituições financeiras.',
+    ['é o órgão normativo máximo do sistema e define as diretrizes gerais da política monetária e de crédito.', 'regula e fiscaliza o mercado de valores mobiliários, como as bolsas de valores.', 'garante os depósitos dos clientes até um limite por meio de um fundo próprio.', 'emite as normas de seguros privados e fiscaliza as seguradoras.'], 4,
+    'O Banco Central é órgão executor: cumpre e faz cumprir as normas do CMN e fiscaliza as instituições financeiras. O papel de principal órgão normativo é do Conselho Monetário Nacional. O mercado de valores mobiliários é supervisionado pela CVM. A garantia de depósitos é feita pelo Fundo Garantidor de Créditos (FGC), e os seguros privados são regulados pelo CNSP e fiscalizados pela Susep.'),
+  mk('simulado-tecnico-enfermagem-concurso', 'Enfermagem',
+    'Segundo as recomendações da OMS e da Anvisa para a higiene das mãos nos serviços de saúde, a higiene com água e sabonete é a técnica indicada quando:',
+    'as mãos estiverem visivelmente sujas ou contaminadas com sangue e outros fluidos corporais.',
+    ['as mãos estiverem sem sujidade visível e for realizar contato com o paciente.', 'as mãos estiverem sem sujidade visível e forem tocadas superfícies próximas ao paciente.', 'as luvas forem retiradas e as mãos estiverem sem sujidade visível.', 'as mãos estiverem sem sujidade visível antes do preparo de medicamentos.'], 2,
+    'Quando há sujidade visível ou contaminação com sangue e outros fluidos corporais, a higiene deve ser feita com água e sabonete. Se as mãos não estão visivelmente sujas, a fricção com preparação alcoólica é suficiente e é a opção preferencial nas demais situações citadas: antes do contato com o paciente, após tocar o entorno, após retirar luvas e antes de preparar medicamentos.'),
+].filter(z => P.some(p => p.slug === z.slug)).map(z => Object.assign(z, { nome: P.find(p => p.slug === z.slug).nome }));
+
+const QUIZ = '<div class="box" id="quiz"><span class="tag" id="qt">Teste uma questão</span><p id="qe"></p><div id="qo"></div><div id="why" hidden></div></div><script>' +
+  '!function(){var Z=' + JSON.stringify(QZ).replace(/</g, '\\u003c') + ',n=Z.length,L=-1;try{L=+localStorage.getItem("qz")}catch(e){}' +
+  'if(!n)return;var i=Math.floor(Math.random()*n);if(n>1&&i===L)i=(i+1+Math.floor(Math.random()*(n-1)))%n;try{localStorage.setItem("qz",i)}catch(e){}' +
+  'var z=Z[i],$=function(x){return document.getElementById(x)},o=$("qo"),w=$("why");$("qt").textContent="Teste uma questão · "+z.tag;$("qe").textContent=z.q;' +
+  'z.alt.forEach(function(t,j){var b=document.createElement("button"),l=document.createElement("b");b.className="o";l.textContent="ABCDE".charAt(j);b.appendChild(l);b.appendChild(document.createTextNode(t));' +
+  'b.onclick=function(){var bs=o.children;for(var k=0;k<bs.length;k++){bs[k].disabled=true;if(k===z.ok)bs[k].classList.add("ok");else if(k===j)bs[k].classList.add("bad")}' +
+  'w.textContent=(j===z.ok?"Correto. ":"Não foi dessa vez. ")+z.why;var a=document.createElement("a"),d=document.createElement("div");a.className="btn sm";a.href="/"+z.slug+"/";a.textContent="Ver o simulado de "+z.nome;d.appendChild(a);w.appendChild(d);w.hidden=false};o.appendChild(b)})}()</script>';
 
 function home() {
   const cargos = P.filter(p => p.tipo === 'Cargo'), mats = P.filter(p => p.tipo === 'Matéria');
