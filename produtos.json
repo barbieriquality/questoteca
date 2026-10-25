@@ -86,7 +86,28 @@
         "Saúde do adulto: clínica e cirúrgica",
         "Urgência, emergência e segurança do paciente",
         "Saúde da mulher, da criança e do adolescente",
-        "Idoso, saúde mental, trabalhador e populações específicas"
+                "Idoso, saúde mental, trabalhador e populações específicas"
+      ]
+    },
+    {
+      "slug": "simulado-tecnico-seguro-social-inss-concurso",
+      "nome": "Técnico do Seguro Social (INSS)",
+      "tipo": "Cargo",
+      "nivel": "Médio",
+      "questoes": 300,
+      "cor": "#B7791F",
+      "link": "https://pay.hotmart.com/E108180737V",
+      "assuntos": [
+        "Seguridade Social: princípios e organização",
+        "Custeio: Lei 8.212/1991",
+        "Segurados, dependentes e carência: Lei 8.213/1991",
+        "Benefícios previdenciários",
+        "Assistência Social e LOAS",
+        "Processo, recursos e atendimento previdenciário",
+        "Noções de Direito Constitucional e Administrativo",
+        "Ética no serviço público e cidadania",
+        "Língua Portuguesa aplicada ao cargo",
+        "Raciocínio lógico e informática"
       ]
     },
     {
