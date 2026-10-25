@@ -107,6 +107,26 @@
         "Noções de Direito Constitucional e Administrativo",
         "Ética no serviço público e cidadania",
         "Língua Portuguesa aplicada ao cargo",
+                "Raciocínio lógico e informática"
+      ]
+    },
+    {
+      "slug": "simulado-policia-pm-pc-penal-concurso",
+      "nome": "Polícia (PM, PC e Penal)",
+      "tipo": "Cargo",
+      "nivel": "Médio",
+      "questoes": 300,
+      "cor": "#2B2F36",
+      "link": "https://pay.hotmart.com/X108181202E",
+      "assuntos": [
+        "Direito Constitucional e segurança pública",
+        "Direito Penal: Parte Geral",
+        "Direito Penal: Parte Especial",
+        "Legislação penal especial",
+        "Processo Penal",
+        "Direitos Humanos",
+        "Direito Administrativo e ética policial",
+        "Língua Portuguesa aplicada ao cargo",
         "Raciocínio lógico e informática"
       ]
     },
